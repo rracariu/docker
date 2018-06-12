@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install curl libcurl3 \
  && bash /tmp/install.sh -p /dlang install "${COMPILER}-${COMPILER_VERSION}" \
  && rm /tmp/install.sh \
  && apt-get autoremove -y curl \
- && apt-get install -y gcc cmake \
  && rm -rf /var/cache/apt \
  && rm -rf /dlang/${COMPILER}-*/lib32 \
  && rm -rf /dlang/dub-1.0.0/dub.tar.gz
@@ -34,8 +33,15 @@ RUN cd /tmp \
 && rm "${COMPILER}2-${COMPILER_VERSION}-linux-armhf.tar.xz" \
 && rm -R "${COMPILER}2-${COMPILER_VERSION}-linux-armhf"
 
+ RUN apt-get autoremove -y python \
+ && apt-get autoremove -y qemu-user \
+ && apt-get autoremove -y qemu-user-static\
+ && apt-get autoremove -y gfortran-4.9-arm-linux-gnueabihf \
+ && apt-get autoremove -y git \
+ && apt-get autoremove -y vim-runtime
+
 RUN cd /tmp \
- && echo 'void main() {import std.stdio; stdout.writeln("it works"); }' > test.d \
+ && echo 'void main() {import std.stdio; stdout.writeln("it works");}' > test.d \
  && ldc-armhf test.d \
  && readelf -h /tmp/test| grep 'Machine:' | sed 's/:/\n/g' | tail -n 1 | grep ARM > /dev/null \
  && rm test*
