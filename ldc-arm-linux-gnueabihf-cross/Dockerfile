@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install curl libcurl3 \
  && curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
  && bash /tmp/install.sh -p /dlang install "${COMPILER}-${COMPILER_VERSION}" \
  && rm /tmp/install.sh \
- && apt-get autoremove -y curl \
  && rm -rf /var/cache/apt \
  && rm -rf /dlang/${COMPILER}-*/lib32 \
  && rm -rf /dlang/dub-1.0.0/dub.tar.gz
@@ -34,8 +33,9 @@ RUN cd /tmp \
 && rm -R "${COMPILER}2-${COMPILER_VERSION}-linux-armhf"
 
  RUN apt-get autoremove -y python \
+ && apt-get autoremove -y python2.7-minimal \
  && apt-get autoremove -y qemu-user \
- && apt-get autoremove -y qemu-user-static\
+ && apt-get autoremove -y qemu-user-static \
  && apt-get autoremove -y gfortran-4.9-arm-linux-gnueabihf \
  && apt-get autoremove -y git \
  && apt-get autoremove -y vim-runtime
