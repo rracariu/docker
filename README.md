@@ -1,4 +1,4 @@
-# docker cross ldc
+# doker - ldc cross compile
 Provides dlang LDC docker images for cross compile usage.
 
 ## about
