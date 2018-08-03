@@ -1,4 +1,10 @@
-# doker - dub-registry
+# **OBSOLETE** doker - dub-registry
+
+Please use the official [image](https://hub.docker.com/r/dlangcommunity/dub-registry/)
+
+More info on https://github.com/dlang/dub-registry#deploy-your-private-dub-registry-with-docker
+
+# OBSOLETE
 docker image for running `dub-registry`.
 
 ## about
