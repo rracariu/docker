@@ -11,7 +11,7 @@ Original work https://github.com/jacob-carlborg/docker-ldc-windows
 Build local image
 
 ```
-docker build -t --build-arg MSVC_LIBS_URL=http://your-path-to-msvc-libs ldc-win-x86-64
+docker build --build-arg MSVC_LIBS_URL=http://your-path-to-msvc-libs -t ldc-win-x86-64
 ```
 
 Mind that this image uses you **onw** copy of the MS VC libraries. Make sure you understant the legal jargon for the propietary license they are distributed under.
