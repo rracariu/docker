@@ -36,7 +36,7 @@ RUN cd /tmp \
  && apt-get autoremove -y python2.7-minimal \
  && apt-get autoremove -y qemu-user \
  && apt-get autoremove -y qemu-user-static \
- && apt-get autoremove -y gfortran-arm-linux-gnueabihf \
+ && apt-get autoremove -y -m gfortran \
  && apt-get autoremove -y git \
  && apt-get autoremove -y vim-runtime
 
