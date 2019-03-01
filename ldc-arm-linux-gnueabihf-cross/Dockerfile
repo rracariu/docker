@@ -4,7 +4,7 @@ LABEL maintainer="Radu Racariu <radu.racariu@gmail.com>"
 
 ENV \
   COMPILER=ldc \
-  COMPILER_VERSION=1.12.0
+  COMPILER_VERSION=1.14.0
 
 RUN apt-get update && apt-get install curl libcurl3 \
  && curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
