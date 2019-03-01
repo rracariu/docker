@@ -6,7 +6,7 @@ ENV \
   COMPILER=ldc \
   COMPILER_VERSION=1.14.0
 
-RUN apt-get update && apt-get install curl libcurl3 \
+RUN apt-get update && apt-get install curl libcurl3 binutils-arm-linux-gnueabihf \
  && curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
  && bash /tmp/install.sh -p /dlang install "${COMPILER}-${COMPILER_VERSION}" \
  && rm /tmp/install.sh \
