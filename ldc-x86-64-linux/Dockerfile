@@ -4,7 +4,7 @@ MAINTAINER Radu Racariu <radu.racariu@gmail.com>
 
 ENV \
   COMPILER=ldc \
-  COMPILER_VERSION=1.12.0
+  COMPILER_VERSION=1.14.0
 
 RUN apt-get update && apt-get install -y curl libcurl3 build-essential libssl-dev libz-dev \
  && curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
