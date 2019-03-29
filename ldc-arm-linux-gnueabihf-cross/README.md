@@ -1,3 +1,5 @@
+[![Docker pulls](https://img.shields.io/docker/pulls/rracariu/rracariu/ldc-linux-armhf.svg)](https://hub.docker.com/r/rracariu/rracariu/ldc-linux-armhf/)
+[![Docker Build](https://img.shields.io/docker/automated/rracariu/ldc-linux-armhf.svg)](https://hub.docker.com/r/rracariu/rracariu/ldc-linux-armhf/)
 # doker - ldc cross compile
 Provides dlang LDC docker images for cross compile usage.
 
