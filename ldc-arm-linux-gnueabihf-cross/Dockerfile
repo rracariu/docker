@@ -6,13 +6,13 @@ ENV \
   COMPILER=ldc \
   COMPILER_VERSION=1.14.0
 
-RUN apt-get update && apt-get install -y curl libcurl3 binutils-arm-linux-gnueabihf \
- && curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
+RUN apt-get install -y curl libcurl3 binutils-arm-linux-gnueabihf
+RUN rm -rf /var/cache/apt
+
+RUN curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
  && bash /tmp/install.sh -p /dlang install "${COMPILER}-${COMPILER_VERSION}" \
  && rm /tmp/install.sh \
- && rm -rf /var/cache/apt \
- && rm -rf /dlang/${COMPILER}-*/lib32 \
- && rm -rf /dlang/dub-1.0.0/dub.tar.gz
+ && rm -rf /dlang/${COMPILER}-*/lib32
 
 ENV \
   PATH=/dlang/${COMPILER}-${COMPILER_VERSION}/bin:${PATH} \
@@ -25,20 +25,20 @@ RUN echo 'ldc2 -mtriple=armv6-hardfloat-linux-gnueabihf -gcc=arm-linux-gnueabi-g
 
 
 RUN cd /tmp \
-&& wget -q "https://github.com/ldc-developers/ldc/releases/download/v${COMPILER_VERSION}/${COMPILER}2-${COMPILER_VERSION}-linux-armhf.tar.xz" \
-&& tar xf "${COMPILER}2-${COMPILER_VERSION}-linux-armhf.tar.xz" \
 && rm -R "/dlang/${COMPILER}-${COMPILER_VERSION}/lib" \
-&& mv "${COMPILER}2-${COMPILER_VERSION}-linux-armhf/lib" "/dlang/${COMPILER}-${COMPILER_VERSION}/" \
-&& rm "${COMPILER}2-${COMPILER_VERSION}-linux-armhf.tar.xz" \
-&& rm -R "${COMPILER}2-${COMPILER_VERSION}-linux-armhf"
+&& "/dlang/${COMPILER}-${COMPILER_VERSION}/bin/ldc-build-runtime" --dFlags="-w;-mtriple=armv6-hardfloat-linux-gnueabihf" --cFlags="-fPIC" --targetSystem="Linux;UNIX" \
+&& mkdir "/dlang/${COMPILER}-${COMPILER_VERSION}/lib" \
+&& cp ldc-build-runtime.tmp/lib/*.a "/dlang/${COMPILER}-${COMPILER_VERSION}/lib" \
+&& cp ldc-build-runtime.tmp/lib/*.so "/dlang/${COMPILER}-${COMPILER_VERSION}/lib" \
+&& rm -R ldc-build-runtime.tmp
 
  RUN apt-get autoremove -y python \
  && apt-get autoremove -y python2.7-minimal \
  && apt-get autoremove -y qemu-user \
  && apt-get autoremove -y qemu-user-static \
- && apt-get autoremove -y -m gfortran \
- && apt-get autoremove -y git \
- && apt-get autoremove -y vim-runtime
+ && apt-get autoremove -y vim-runtime \
+ && apt-get autoremove -y wget \
+ && rm -rf /var/cache/apt
 
 RUN cd /tmp \
  && echo 'void main() {import std.stdio; stdout.writeln("it works");}' > test.d \
@@ -49,7 +49,6 @@ RUN cd /tmp \
 WORKDIR /src
 
 RUN gosu nobody true \
- && apt-get autoremove -y wget \
  && rm -rf /var/lib/apt/lists/* \
  && chmod 755 -R /dlang
 
