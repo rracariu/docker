@@ -18,9 +18,10 @@ ENV \
   PATH=/dlang/${COMPILER}-${COMPILER_VERSION}/bin:${PATH} \
   LD_LIBRARY_PATH=/dlang/${COMPILER}-${COMPILER_VERSION}/lib \
   LIBRARY_PATH=/dlang/${COMPILER}-${COMPILER_VERSION}/lib \
+  CC=arm-linux-gnueabihf-gcc \
   PS1="(${COMPILER}-${COMPILER_VERSION}) \\u@\\h:\\w\$"
 
-RUN echo 'ldc2 -mtriple=armv6-hardfloat-linux-gnueabihf -gcc=arm-linux-gnueabi-gcc "$@"' > /dlang/${COMPILER}-${COMPILER_VERSION}/bin/ldc-armhf \
+RUN echo 'ldc2 -mtriple=armv6-hardfloat-linux-gnueabihf -gcc=arm-linux-gnueabihf-gcc "$@"' > /dlang/${COMPILER}-${COMPILER_VERSION}/bin/ldc-armhf \
  && chmod +x /dlang/${COMPILER}-${COMPILER_VERSION}/bin/ldc-armhf
 
 
