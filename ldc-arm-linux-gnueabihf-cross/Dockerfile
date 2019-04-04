@@ -15,13 +15,13 @@ RUN curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
  && rm -rf /dlang/${COMPILER}-*/lib32
 
 ENV \
-  PATH=/dlang/${COMPILER}-${COMPILER_VERSION}/bin:${PATH} \
+  PATH=/dlang/${COMPILER}-${COMPILER_VERSION}/bin:/usr/xcc/armv7-unknown-linux-gnueabi/bin:${PATH} \
   LD_LIBRARY_PATH=/dlang/${COMPILER}-${COMPILER_VERSION}/lib \
   LIBRARY_PATH=/dlang/${COMPILER}-${COMPILER_VERSION}/lib \
-  CC=arm-linux-gnueabi-gcc \
+  CC=armv7-unknown-linux-gnueabi-gcc \
   PS1="(${COMPILER}-${COMPILER_VERSION}) \\u@\\h:\\w\$"
 
-RUN echo 'ldc2 -mtriple=armv6-hardfloat-linux-gnueabihf -gcc=arm-linux-gnueabi-gcc "$@"' > /dlang/${COMPILER}-${COMPILER_VERSION}/bin/ldc-armhf \
+RUN echo 'ldc2 -mtriple=armv6-hardfloat-linux-gnueabihf -gcc=armv7-unknown-linux-gnueabi-gcc "$@"' > /dlang/${COMPILER}-${COMPILER_VERSION}/bin/ldc-armhf \
  && chmod +x /dlang/${COMPILER}-${COMPILER_VERSION}/bin/ldc-armhf
 
 
