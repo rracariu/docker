@@ -4,7 +4,7 @@ LABEL maintainer="Radu Racariu <radu.racariu@gmail.com>"
 
 ENV \
   COMPILER=ldc \
-  COMPILER_VERSION=1.14.0
+  COMPILER_VERSION=1.16.0
 
 RUN apt-get install -y curl libcurl3 binutils-arm-linux-gnueabihf
 RUN rm -rf /var/cache/apt
