@@ -8,7 +8,7 @@ Provides dlang LDC docker images for cross compile usage.
 Based on https://github.com/dockcross and https://github.com/lindt/docker-ldc
 
 ## usage
-Considering that `some.d` file is located in the current dir and the target is Linux ARM with hardware floating point
+Considering that `some.d` file is located in the current dir and the target is Linux ARM with software floating point
 ```
 docker run --rm -ti -v $(pwd):/src rracariu/ldc-linux-arm ldc-arm some.d
 ```
