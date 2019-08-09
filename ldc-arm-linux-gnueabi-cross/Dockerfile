@@ -1,12 +1,14 @@
-FROM ubuntu:latest
+FROM ubuntu:bionic
 
 LABEL maintainer="Radu Racariu <radu.racariu@gmail.com>"
 
+ARG LDC_VER=1.16.0
+
 ENV \
   COMPILER=ldc \
-  COMPILER_VERSION=1.16.0
+  COMPILER_VERSION=$LDC_VER
 
-RUN apt-get update && apt-get install -y gpg gosu xz-utils curl gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi cmake
+RUN apt-get update && apt-get install -y libssl1.0-dev gpg gosu xz-utils curl gcc-arm-linux-gnueabi binutils-arm-linux-gnueabi cmake
 
 RUN curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
  && bash /tmp/install.sh -p /dlang install "${COMPILER}-${COMPILER_VERSION}" \
@@ -54,4 +56,4 @@ COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["ldc-arm"]
+CMD ["ldc-arm", "--version"]

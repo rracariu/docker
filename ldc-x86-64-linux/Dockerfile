@@ -1,12 +1,14 @@
-FROM ubuntu:latest
+FROM ubuntu:bionic
 
 MAINTAINER Radu Racariu <radu.racariu@gmail.com>
 
+ARG LDC_VER=1.16.0
+
 ENV \
   COMPILER=ldc \
-  COMPILER_VERSION=1.16.0
+  COMPILER_VERSION=$LDC_VER
 
-RUN apt-get update && apt-get install -y gosu curl build-essential libssl-dev libxml2 libz-dev \
+RUN apt-get update && apt-get install -y libssl1.0-dev gosu curl build-essential libxml2 libz-dev \
  && curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
  && bash /tmp/install.sh -p /dlang install "${COMPILER}-${COMPILER_VERSION}" \
  && rm /tmp/install.sh \
@@ -25,8 +27,7 @@ RUN cd /tmp \
 
 WORKDIR /src
 
-RUN apt-get update \
- && gosu nobody true \
+RUN gosu nobody true \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /var/cache/apt \
  && chmod 755 -R /dlang
@@ -35,4 +36,4 @@ COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["${COMPILER}2"]
+CMD ["ldc2", "--version"]
