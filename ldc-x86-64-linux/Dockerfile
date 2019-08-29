@@ -2,13 +2,13 @@ FROM ubuntu:bionic
 
 MAINTAINER Radu Racariu <radu.racariu@gmail.com>
 
-ARG LDC_VER=1.16.0
+ARG LDC_VER=1.17.0
 
 ENV \
   COMPILER=ldc \
   COMPILER_VERSION=$LDC_VER
 
-RUN apt-get update && apt-get install -y libssl1.0-dev gosu curl build-essential libxml2 libz-dev \
+RUN apt-get update && apt-get install -y g++ libssl1.0-dev gosu curl build-essential libxml2 libz-dev \
  && curl -fsS -o /tmp/install.sh https://dlang.org/install.sh \
  && bash /tmp/install.sh -p /dlang install "${COMPILER}-${COMPILER_VERSION}" \
  && rm /tmp/install.sh \
